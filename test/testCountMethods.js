@@ -51,4 +51,10 @@ describe('TextStatistics', function() {
       assert.equal(1, ts.wordCount());
     });
   });
+
+  describe('#sentencesOver25WordsList()', function() {
+    it('should catch a sentence with exactly 25 words');
+    it('should not catch a 24 word sentence');
+    it('should catch a longer than 25 word sentence');
+  });
 });
