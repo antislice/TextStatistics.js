@@ -51,4 +51,33 @@ describe('TextStatistics', function() {
       assert.equal(1, ts.wordCount());
     });
   });
+
+  describe('#sentencesOver25WordsList()', function() {
+    it('should catch a sentence with exactly 25 words', function() {
+      var longSentence = 'This sentence has exactly twenty five words and so this test should complain about it ' +
+                         'sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive.';
+      var ts = TextStatistics(longSentence);
+
+      assert.equal(25, ts.wordCount());
+      assert.equal(longSentence, ts.sentencesOver25WordsList()[0]);
+    });
+
+    it('should not catch a 24 word sentence', function() {
+      var longSentence = 'This sentence has exactly twenty four words and so this test should complain about it ' +
+                         'sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour.';
+      var ts = TextStatistics(longSentence);
+
+      assert.equal(24, ts.wordCount());
+      assert.equal(0, ts.sentencesOver25WordsList().length);
+    });
+
+    it('should catch a longer than 25 word sentence', function() {
+      var longSentence = 'This sentence has exactly twenty six words and so this test should complain about it ' +
+                         'sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix.';
+      var ts = TextStatistics(longSentence);
+
+      assert.equal(26, ts.wordCount());
+      assert.equal(longSentence, ts.sentencesOver25WordsList()[0]);
+    });
+  });
 });
