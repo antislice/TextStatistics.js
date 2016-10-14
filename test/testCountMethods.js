@@ -50,6 +50,12 @@ describe('TextStatistics', function() {
       var ts = TextStatistics('long-term');
       assert.equal(1, ts.wordCount());
     });
+
+    it('should count words abbreviated with a ’ (not \') as one word', function() {
+      var text = 'It’s also important to think about how people access your content.';
+      var ts = TextStatistics(text);
+      assert.equal(11, ts.wordCount());
+    });
   });
 
   describe('#sentencesOver25WordsList()', function() {
